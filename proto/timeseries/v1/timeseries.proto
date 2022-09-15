@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package timeseries.v1;
+
+option go_package = "github.com/hasfjord/timeseries/api/gen";
+
+service TimeSeriesService {
+    rpc PostMeasurement(PostMeasurementRequest) returns (PostMeasurementResponse) {}
+}
+
+message PostMeasurementRequest {
+    string type = 1; 
+    Measurement measurement = 2;
+}
+
+message Measurement {
+    string name = 1;
+    double value = 2;
+    int64 timestamp = 3;
+    map<string, string> tags = 4;
+}
+
+message PostMeasurementResponse {
+    string id = 1;
+}
